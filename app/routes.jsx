@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Root from "./layouts/Root";
+import AppLayout from "./layouts/AppLayout";
 import ErrorBoundary from "./layouts/ErrorBoundary";
 import Home from "./routes/home/index.jsx";
 import Login from "./routes/login/index.jsx";
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
     children: [
       {
         middleware: [authMiddleware],
+        Component: AppLayout,
         children: [
           {
             index: true,

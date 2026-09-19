@@ -13,7 +13,7 @@ function refreshTokens() {
     .post(`${baseURL}/refresh`, null, {
       headers: { Authorization: `Bearer ${tokenStorage.getRefreshToken()}` },
     })
-    .then(({ data }) => tokenStorage.setTokens(data))
+    .then(({ data }) => tokenStorage.setAccessToken(data.access_token))
     .finally(() => {
       refreshPromise = null;
     });

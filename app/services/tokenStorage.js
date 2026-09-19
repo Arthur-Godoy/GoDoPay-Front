@@ -25,6 +25,12 @@ export const tokenStorage = {
     window.localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
   },
 
+  setAccessToken(access_token) {
+    if (!isBrowser()) return;
+
+    window.localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
+  },
+
   clear() {
     if (!isBrowser()) return;
 

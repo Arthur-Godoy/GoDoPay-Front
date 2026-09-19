@@ -9,11 +9,11 @@ export default function AuthLayout({ title, subtitle, children }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: "grey.100",
+        bgcolor: "background.default",
         px: 2,
       }}
     >
-      <Card sx={{ width: "100%", maxWidth: 420 }} elevation={3}>
+      <Card sx={{ width: "100%", maxWidth: 420 }}>
         <CardContent sx={{ p: 4 }}>
           <Typography variant="h4" component="h1" fontWeight={700} gutterBottom>
             {title}
