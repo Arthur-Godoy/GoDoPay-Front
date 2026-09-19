@@ -1,10 +1,12 @@
-import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [tailwindcss(), reactRouter()],
+  plugins: [tailwindcss(), react()],
   resolve: {
-    tsconfigPaths: true,
+    alias: {
+      "~": new URL("./app", import.meta.url).pathname,
+    },
   },
 });
