@@ -1,4 +1,5 @@
 import axios from "axios";
+import { sessionStorage } from "~/services/sessionStorage";
 import { tokenStorage } from "~/services/tokenStorage";
 
 const baseURL = "http://localhost:8000/api";
@@ -23,6 +24,7 @@ function refreshTokens() {
 
 async function logout() {
   tokenStorage.clear();
+  sessionStorage.clear();
 
   const { router } = await import("~/routes");
 

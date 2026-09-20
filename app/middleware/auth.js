@@ -1,6 +1,8 @@
-import { authService } from "~/services/http/authService";
+import { redirect } from "react-router";
+import { tokenStorage } from "~/services/tokenStorage";
 
-export const authMiddleware = async ({ request, context }) => {
-  const { data } = await authService.me();
-  return data.user ?? "/auth/login";
+export const authMiddleware = async () => {
+  if (!tokenStorage.getAccessToken()) {
+    throw redirect("/login");
+  }
 };

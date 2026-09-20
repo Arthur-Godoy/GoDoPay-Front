@@ -1,8 +1,8 @@
 import useHttp from "~/hooks/useHttp";
 
 export const transactionService = {
-  list(filters) {
-    return useHttp.get("/transactions", { params: filters });
+  list(params) {
+    return useHttp.get("/transactions", { params });
   },
 
   show(transactionId) {

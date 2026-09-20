@@ -3,19 +3,22 @@ import { createTheme } from "@mui/material/styles";
 const BROWN_DEEP = "#654922";
 const AMBER = "#956E2F";
 const GOLD = "#B68B4B";
-const SAGE = "#4D574E";
-const SURFACE = "#303531";
-const BASE = "#202221";
+const SAGE = "#4a514b";
+const PAPER = "#0f0e0e";
+const BASE = "#161716";
 
-const CARD = "#272A29";
+const CARD = "#1c1e1d";
 const BORDER = "#3A403B";
 const TEXT = "#EDE8E0";
 const TEXT_DIM = "#A39C90";
+const GREEN = "#7BA86A";
+const RED = "#C9685E";
 
 const bodyFont = '"Inter", system-ui, -apple-system, sans-serif';
 
 const theme = createTheme({
   cssVariables: true,
+  modularCssLayers: "mui",
   palette: {
     mode: "dark",
     primary: {
@@ -32,11 +35,23 @@ const theme = createTheme({
     },
     background: {
       default: BASE,
-      paper: SURFACE,
+      paper: PAPER,
     },
     text: {
       primary: TEXT,
       secondary: TEXT_DIM,
+    },
+    success: {
+      main: GREEN,
+      light: "#96BE86",
+      dark: "#5E8850",
+      contrastText: BASE,
+    },
+    error: {
+      main: RED,
+      light: "#D98A81",
+      dark: "#A04E45",
+      contrastText: BASE,
     },
     divider: BORDER,
     action: {
