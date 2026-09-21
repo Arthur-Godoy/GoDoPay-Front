@@ -15,7 +15,7 @@ const HALO_SIZE = 260;
 
 const balanceCardSx = (isNegative) => ({
   background: (theme) =>
-    `linear-gradient(145deg, ${theme.palette.background.paper} 0%, #232725 100%)`,
+    `linear-gradient(145deg, ${theme.palette.background.paper2} 0%, #232725 100%)`,
   "&::after": {
     content: '""',
     position: "absolute",

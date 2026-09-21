@@ -4,6 +4,7 @@ const AMBER = "#956E2F";
 const GOLD = "#B68B4B";
 const SAGE = "rgb(74, 81, 75)";
 const PAPER = "#161616";
+const PAPER2 = "#202020";
 const BASE = "#161716";
 
 const CARD = "#0f1010";
@@ -35,6 +36,7 @@ const theme = createTheme({
     background: {
       default: BASE,
       paper: PAPER,
+      'paper2': PAPER2,
     },
     text: {
       primary: TEXT,
