@@ -1,6 +1,7 @@
 import * as yup from "yup";
 
 const MIN_AMOUNT_IN_CENTS = 1;
+const NICKNAME_MAX_LENGTH = 255;
 const AGENCY_LENGTH = 4;
 const DIGIT_LENGTH = 1;
 
@@ -23,4 +24,12 @@ export const contactSchema = yup.object({
     .trim()
     .required("Informe o dígito")
     .length(DIGIT_LENGTH, "O dígito deve ter 1 caractere"),
+});
+
+export const accountSchema = yup.object({
+  nickname: yup
+    .string()
+    .trim()
+    .required("Informe o nome da conta")
+    .max(NICKNAME_MAX_LENGTH, `Máximo de ${NICKNAME_MAX_LENGTH} caracteres`),
 });

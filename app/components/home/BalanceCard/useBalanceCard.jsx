@@ -5,6 +5,7 @@ const HIDDEN_BALANCE_KEY = "godopay.hide_balance";
 export function useBalanceCard() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSwitcherOpen, setIsSwitcherOpen] = useState(false);
+  const [isNewAccountOpen, setIsNewAccountOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(
     () => window.localStorage.getItem(HIDDEN_BALANCE_KEY) === "true",
   );
@@ -19,6 +20,13 @@ export function useBalanceCard() {
   }, []);
 
   const closeSwitcher = useCallback(() => setIsSwitcherOpen(false), []);
+
+  const openNewAccount = useCallback(() => {
+    setAnchorEl(null);
+    setIsNewAccountOpen(true);
+  }, []);
+
+  const closeNewAccount = useCallback(() => setIsNewAccountOpen(false), []);
 
   const toggleHidden = useCallback(() => {
     setIsHidden((previous) => {
@@ -37,6 +45,9 @@ export function useBalanceCard() {
     isSwitcherOpen,
     openSwitcher,
     closeSwitcher,
+    isNewAccountOpen,
+    openNewAccount,
+    closeNewAccount,
     isHidden,
     toggleHidden,
   };

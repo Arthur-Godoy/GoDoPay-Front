@@ -121,7 +121,6 @@ export default function TransactionReceipt({
               <RelatedTransaction
                 title="Estorno da transação"
                 transaction={transaction.return_of_transaction}
-                onOpen={openRelated}
               />
             )}
 
@@ -129,7 +128,6 @@ export default function TransactionReceipt({
               <RelatedTransaction
                 title="Estornada por"
                 transaction={transaction.is_returned_by_transaction}
-                onOpen={openRelated}
               />
             )}
 

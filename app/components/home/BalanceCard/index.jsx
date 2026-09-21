@@ -1,9 +1,11 @@
 import { Box, Card, Menu, MenuItem, Typography } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import IconBadge from "~/components/ui/IconBadge";
 import AccountSwitcher from "~/components/home/AccountSwitcher";
+import NewAccountDialog from "~/components/home/NewAccountDialog";
 import { useAccount } from "~/hooks/useAccount";
 import AccountChip from "./AccountChip";
 import BalanceActions from "./BalanceActions";
@@ -41,6 +43,9 @@ export default function BalanceCard() {
     isSwitcherOpen,
     openSwitcher,
     closeSwitcher,
+    isNewAccountOpen,
+    openNewAccount,
+    closeNewAccount,
     isHidden,
     toggleHidden,
   } = useBalanceCard();
@@ -118,9 +123,16 @@ export default function BalanceCard() {
           <SwapHorizIcon fontSize="small" className="mr-3" />
           Trocar de conta
         </MenuItem>
+
+        <MenuItem onClick={openNewAccount}>
+          <AddCircleOutlineRoundedIcon fontSize="small" className="mr-3" />
+          Criar conta
+        </MenuItem>
       </Menu>
 
       <AccountSwitcher open={isSwitcherOpen} onClose={closeSwitcher} />
+
+      <NewAccountDialog open={isNewAccountOpen} onClose={closeNewAccount} />
     </Card>
   );
 }
