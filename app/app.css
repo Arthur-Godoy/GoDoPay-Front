@@ -12,3 +12,7 @@
 html {
   color-scheme: dark;
 }
+
+.MuiInputBase-input {
+  box-sizing: content-box;
+}

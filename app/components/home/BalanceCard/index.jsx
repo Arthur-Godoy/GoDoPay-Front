@@ -8,6 +8,7 @@ import { useAccount } from "~/hooks/useAccount";
 import AccountChip from "./AccountChip";
 import BalanceActions from "./BalanceActions";
 import BalanceAmount from "./BalanceAmount";
+import WelcomeMessage from "./WelcomeMessage";
 import { useBalanceCard } from "./useBalanceCard";
 
 const HALO_SIZE = 260;
@@ -31,7 +32,7 @@ const balanceCardSx = (isNegative) => ({
 });
 
 export default function BalanceCard() {
-  const { currentAccount, isLoading } = useAccount();
+  const { user, currentAccount, isLoading } = useAccount();
 
   const {
     anchorEl,
@@ -50,11 +51,20 @@ export default function BalanceCard() {
   return (
     <Card className="relative overflow-hidden" sx={balanceCardSx(isNegative)}>
       <Box className="relative z-[1] p-6">
-        <Box className="flex flex-row items-start justify-between gap-4">
-          <Box className="flex min-w-0 flex-col gap-2.5">
-            <Typography variant="h6" className="leading-tight" noWrap>
-              {currentAccount?.nickname ?? "Conta"}
-            </Typography>
+        <Box className="flex flex-row items-start justify-between">
+          <Box className="flex min-w-0 flex-col gap-0">
+            <Box className="mb-4 flex min-w-0 flex-col gap-2">
+              <WelcomeMessage name={user?.name} isLoading={isLoading} />
+
+              <Typography
+                variant="subtitle2"
+                color="text.secondary"
+                className="leading-tight"
+                noWrap
+              >
+                {currentAccount?.nickname ?? "Conta"}
+              </Typography>
+            </Box>
 
             {currentAccount && (
               <AccountChip

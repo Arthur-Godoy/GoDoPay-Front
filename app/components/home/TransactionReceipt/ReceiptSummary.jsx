@@ -3,7 +3,7 @@ import { formatMoney } from "~/utils/money";
 
 export default function ReceiptSummary({ amount, isIncoming, isRefund, wasReturned }) {
   return (
-    <Box className="flex flex-col items-center gap-2 py-6">
+    <Box className="flex flex-col items-center gap-2 pb-5">
       <Typography variant="overline" color="text.secondary">
         Comprovante
       </Typography>

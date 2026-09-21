@@ -21,6 +21,15 @@ import EmptyState from "./EmptyState";
 import LoadingRows from "./LoadingRows";
 import { useTransactions } from "./useTransactions";
 
+function labelSpacing({ headerAlign, align }) {
+  const resolved = headerAlign ?? align;
+
+  if (resolved === "left") return "ms-5";
+  if (resolved === "right") return "me-5";
+
+  return undefined;
+}
+
 export default function TransactionList() {
   const {
     transactions,
@@ -82,11 +91,14 @@ export default function TransactionList() {
                         sort.order_by === column.field ? sort.order : "asc"
                       }
                       onClick={() => changeSort(column.field)}
+                      className={labelSpacing(column)}
                     >
                       {column.headerName}
                     </TableSortLabel>
                   ) : (
-                    column.headerName
+                    <span className={labelSpacing(column)}>
+                      {column.headerName}
+                    </span>
                   )}
                 </TableCell>
               ))}

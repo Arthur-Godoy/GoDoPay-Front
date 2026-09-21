@@ -32,12 +32,18 @@ export default function TransactionReceipt({
   open,
   onClose,
 }) {
-  const { transaction, accountId, isLoading, isReverting, revert, openRelated } =
-    useTransactionReceipt({
-      transaction: selectedTransaction,
-      open,
-      onClose,
-    });
+  const {
+    transaction,
+    accountId,
+    isLoading,
+    isReverting,
+    revert,
+    openRelated,
+  } = useTransactionReceipt({
+    transaction: selectedTransaction,
+    open,
+    onClose,
+  });
 
   const isIncoming = transaction?.account_receiver_id === accountId;
   const isRefund = Boolean(transaction?.return_of_transaction_id);
@@ -51,10 +57,15 @@ export default function TransactionReceipt({
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
-      <Box className="flex flex-row items-center justify-between gap-4 px-6 pb-4 pt-5">
-        <Logo variant="short" height={38} />
+      <Box className="flex flex-row items-center justify-between gap-4 px-6 py-2">
+        <Logo variant="short" height={58} />
 
-        <IconButton size="small" onClick={onClose} aria-label="Fechar">
+        <IconButton
+          size="small"
+          onClick={onClose}
+          aria-label="Fechar"
+          className="mt-2"
+        >
           <CloseIcon fontSize="small" />
         </IconButton>
       </Box>
@@ -65,7 +76,7 @@ export default function TransactionReceipt({
         <ReceiptSkeleton />
       ) : (
         <>
-          <DialogContent className="px-6 pb-4">
+          <DialogContent className="px-6 pb-1">
             <ReceiptSummary
               amount={transaction.amount}
               isIncoming={isIncoming}
@@ -102,11 +113,7 @@ export default function TransactionReceipt({
                 value={accountLabel(transaction.account_receiver)}
               />
 
-              <ReceiptRow
-                label="ID da transação"
-                value={transaction.id}
-                mono
-              />
+              <ReceiptRow label="ID da transação" value={transaction.id} mono />
             </Box>
 
             {transaction.return_of_transaction && (
@@ -125,25 +132,11 @@ export default function TransactionReceipt({
               />
             )}
 
-            <Divider />
-
-            <Box className="pb-4 pt-2 text-center">
-              <Typography variant="caption" color="text.secondary">
-                Documento gerado pelo GoDoPay
-              </Typography>
-            </Box>
-
-            {wasReturned && (
-              <Alert severity="info">Esta transação já foi estornada.</Alert>
-            )}
-          </DialogContent>
-
-          {canRevert && (
-            <DialogActions className="px-6 pb-5 pt-0">
+            {canRevert && (
               <Button
                 fullWidth
                 variant="outlined"
-                color="error"
+                color="primary"
                 disabled={isReverting}
                 onClick={revert}
                 startIcon={
@@ -156,8 +149,16 @@ export default function TransactionReceipt({
               >
                 Devolver transação
               </Button>
-            </DialogActions>
-          )}
+            )}
+
+            <Divider className="mt-4" />
+
+            <Box className="pb-2 pt-1 text-center">
+              <Typography variant="caption" color="gray">
+                Documento gerado pelo GoDoPay
+              </Typography>
+            </Box>
+          </DialogContent>
         </>
       )}
     </Dialog>

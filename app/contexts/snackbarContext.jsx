@@ -1,5 +1,6 @@
-import { createContext, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
+import { SnackbarContext } from "./snackbar";
 
 const AUTO_HIDE_MS = 4000;
 
@@ -8,8 +9,6 @@ const INITIAL_STATE = {
   message: "",
   severity: "info",
 };
-
-export const SnackbarContext = createContext(null);
 
 export function SnackbarProvider({ children }) {
   const [snackbar, setSnackbar] = useState(INITIAL_STATE);

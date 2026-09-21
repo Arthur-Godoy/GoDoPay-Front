@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ReceiptContext } from "~/contexts/receiptContext";
+import { ReceiptContext } from "~/contexts/receipt";
 
 export function useReceipt() {
   const context = useContext(ReceiptContext);

@@ -26,6 +26,7 @@ export default function TransactionFilters({ filters, onChange, onClear }) {
       <Button
         onClick={onClear}
         disabled={!hasActiveFilters}
+        variant="contained"
         className="shrink-0 sm:min-w-[110px]"
       >
         Limpar

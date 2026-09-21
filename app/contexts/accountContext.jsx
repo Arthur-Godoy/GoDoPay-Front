@@ -1,10 +1,9 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { accountService } from "~/services/http/accountService";
 import { authService } from "~/services/http/authService";
 import { sessionStorage } from "~/services/sessionStorage";
 import { unwrapData } from "~/utils/apiResponse";
-
-export const AccountContext = createContext(null);
+import { AccountContext } from "./account";
 
 function unwrapAccounts(data) {
   const accounts = unwrapData(data);
@@ -23,6 +22,7 @@ export function AccountProvider({ children }) {
   const [accounts, setAccounts] = useState([]);
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(false);
   const [accountVersion, setAccountVersion] = useState(0);
+
 
   const applyUser = useCallback((data) => {
     setUser(data);
@@ -63,14 +63,11 @@ export function AccountProvider({ children }) {
     }
   }, []);
 
-  const switchAccount = useCallback(
-    async (accountId) => {
-      const { data } = await authService.switchAccount(accountId);
+  const switchAccount = async (accountId) => {
+    const { data } = await authService.switchAccount(accountId);
 
-      return applyUser(data);
-    },
-    [applyUser],
-  );
+    return applyUser(data);
+  };
 
   const value = {
     user,

@@ -1,7 +1,6 @@
-import { createContext, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import TransactionReceipt from "~/components/home/TransactionReceipt";
-
-export const ReceiptContext = createContext(null);
+import { ReceiptContext } from "./receipt";
 
 export function ReceiptProvider({ children }) {
   const [transaction, setTransaction] = useState(null);

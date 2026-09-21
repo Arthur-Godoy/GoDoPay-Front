@@ -1,5 +1,5 @@
 import axios from "axios";
-import { sessionStorage } from "~/services/sessionStorage";
+import { clearSession } from "~/services/session";
 import { tokenStorage } from "~/services/tokenStorage";
 
 const baseURL = "http://localhost:8000/api";
@@ -22,15 +22,6 @@ function refreshTokens() {
   return refreshPromise;
 }
 
-async function logout() {
-  tokenStorage.clear();
-  sessionStorage.clear();
-
-  const { router } = await import("~/routes");
-
-  return router.navigate("/login");
-}
-
 useHttp.interceptors.request.use((config) => {
   const token = tokenStorage.getAccessToken();
 
@@ -49,7 +40,7 @@ useHttp.interceptors.response.use(null, async (error) => {
   }
 
   if (config._retry) {
-    await logout();
+    await clearSession();
     return Promise.reject(error);
   }
 
@@ -59,7 +50,7 @@ useHttp.interceptors.response.use(null, async (error) => {
     await refreshTokens();
     return useHttp(config);
   } catch (refreshError) {
-    await logout();
+    await clearSession();
     return Promise.reject(refreshError);
   }
 });

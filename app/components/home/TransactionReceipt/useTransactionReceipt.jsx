@@ -19,6 +19,10 @@ export function useTransactionReceipt({ transaction, open, onClose }) {
     setSelected(transaction);
   }, [open, transaction]);
 
+  function openRelated(transaction) {
+    setSelected(transaction);
+  }
+
   useEffect(() => {
     if (!selected) return;
 
@@ -66,6 +70,6 @@ export function useTransactionReceipt({ transaction, open, onClose }) {
     isLoading: isLoading && !isDetailLoaded,
     isReverting,
     revert,
-    openRelated: setSelected,
+    openRelated
   };
 }

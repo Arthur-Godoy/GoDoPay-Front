@@ -25,7 +25,7 @@ export function buildColumns(accountId) {
       field: "type",
       headerName: "Transação",
       align: "left",
-      sortable: true,
+      sortable: false,
       render: (row) => {
         const isIncoming = row.account_receiver_id === accountId;
         const isRefund = Boolean(row.return_of_transaction_id);
@@ -57,7 +57,7 @@ export function buildColumns(accountId) {
     {
       field: "created_at",
       headerName: "Data",
-      align: "left",
+      align: "center",
       sortable: true,
       render: (row) => (
         <Typography variant="body2" color="text.secondary">

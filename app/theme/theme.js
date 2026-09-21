@@ -1,18 +1,17 @@
 import { createTheme } from "@mui/material/styles";
 
-const BROWN_DEEP = "#654922";
 const AMBER = "#956E2F";
 const GOLD = "#B68B4B";
-const SAGE = "#4a514b";
-const PAPER = "#0f0e0e";
+const SAGE = "rgb(74, 81, 75)";
+const PAPER = "#161616";
 const BASE = "#161716";
 
-const CARD = "#1c1e1d";
-const BORDER = "#3A403B";
+const CARD = "#0f1010";
+const BORDER = "#2d322e";
 const TEXT = "#EDE8E0";
-const TEXT_DIM = "#A39C90";
-const GREEN = "#7BA86A";
-const RED = "#C9685E";
+const TEXT_DIM = "#36332f";
+const GREEN = "#47d015";
+const RED = "#e7402d";
 
 const bodyFont = '"Inter", system-ui, -apple-system, sans-serif';
 
@@ -23,7 +22,7 @@ const theme = createTheme({
     mode: "dark",
     primary: {
       main: GOLD,
-      light: "#C9A368",
+      light: "#ebb76a",
       dark: AMBER,
       contrastText: BASE,
     },
@@ -54,6 +53,9 @@ const theme = createTheme({
       contrastText: BASE,
     },
     divider: BORDER,
+    TableCell: {
+      border: BORDER,
+    },
     action: {
       hover: "rgba(182, 139, 75, 0.08)",
       selected: "rgba(182, 139, 75, 0.28)",
@@ -85,19 +87,19 @@ const theme = createTheme({
         },
       },
     },
-    MuiDrawer: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: BASE,
-          backgroundImage: "none",
-          borderRight: `1px solid ${BORDER}`,
-        },
-      },
-    },
     MuiPaper: {
       styleOverrides: {
         root: {
           backgroundImage: "none",
+        },
+      },
+    },
+    MuiDialog: {
+      defaultProps: {
+        slotProps: {
+          paper: {
+            elevation: 1,
+          },
         },
       },
     },
@@ -134,13 +136,39 @@ const theme = createTheme({
         root: {
           borderRadius: 10,
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: BORDER,
+            borderColor: `${GOLD} !important`,
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: BROWN_DEEP,
+            borderColor: `${AMBER} !important`,
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: GOLD,
+            borderColor: `${GOLD} !important`,
+          },
+        },
+      },
+    },
+    MuiPickersOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: 10,
+          "& .MuiPickersOutlinedInput-notchedOutline": {
+            borderColor: `${GOLD} !important`,
+          },
+          "&:hover .MuiPickersOutlinedInput-notchedOutline": {
+            borderColor: `${AMBER} !important`,
+          },
+          "&.Mui-focused .MuiPickersOutlinedInput-notchedOutline": {
+            borderColor: `${GOLD} !important`,
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          "--mui-palette-text-secondary": GOLD,
+          "&.Mui-focused": {
+            color: GOLD,
           },
         },
       },
