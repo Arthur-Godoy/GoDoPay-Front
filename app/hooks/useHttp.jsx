@@ -4,7 +4,7 @@ import { clearSession } from "~/services/session";
 import { tokenStorage } from "~/services/tokenStorage";
 import { getErrorMessage, hasFieldErrors } from "~/utils/httpError";
 
-const baseURL = "http://localhost:8000/api";
+const baseURL = "http://localhost:8001/api";
 const PUBLIC_ENDPOINTS = ["/login", "/register", "/refresh"];
 
 const useHttp = axios.create({ baseURL });

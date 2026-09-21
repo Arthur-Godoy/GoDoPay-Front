@@ -13,7 +13,7 @@ export default defineConfig({
   },
   server: {
     host: true,
-    port: 3000,
+    port: 3001,
     watch: usePolling
       ? {
           usePolling: true,
@@ -21,7 +21,7 @@ export default defineConfig({
         }
       : undefined,
     hmr: {
-      clientPort: 3000,
+      clientPort: 3001,
     },
   },
 });
