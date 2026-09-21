@@ -1,5 +1,6 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
+import { registerErrorNotifier } from "~/services/errorNotifier";
 import { SnackbarContext } from "./snackbar";
 
 const AUTO_HIDE_MS = 4000;
@@ -31,6 +32,10 @@ export function SnackbarProvider({ children }) {
     }),
     [showSnackbar],
   );
+
+  useEffect(() => {
+    registerErrorNotifier(value.showError);
+  }, [value]);
 
   return (
     <SnackbarContext.Provider value={value}>

@@ -12,6 +12,10 @@ export function getErrorMessage(error) {
   return DEFAULT_MESSAGE;
 }
 
+export function hasFieldErrors(error) {
+  return Boolean(error?.response?.status === 422 && error.response.data?.errors);
+}
+
 export function applyFieldErrors(error, form) {
   const fieldErrors = error?.response?.status === 422 ? error.response.data?.errors : null;
 

@@ -2,11 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import { transactionService } from "~/services/http/transactionService";
 import { useAccount } from "~/hooks/useAccount";
 import { useSnackbar } from "~/hooks/useSnackbar";
-import { getErrorMessage } from "~/utils/httpError";
 
 export function useTransactionReceipt({ transaction, open, onClose }) {
   const { currentAccount, loadUser } = useAccount();
-  const { showSuccess, showError } = useSnackbar();
+  const { showSuccess } = useSnackbar();
 
   const [selected, setSelected] = useState(null);
   const [detail, setDetail] = useState(null);
@@ -35,7 +34,7 @@ export function useTransactionReceipt({ transaction, open, onClose }) {
       .then(({ data }) => {
         if (isCurrent) setDetail(data);
       })
-      .catch((error) => showError(getErrorMessage(error)))
+      .catch(() => {})
       .finally(() => {
         if (isCurrent) setIsLoading(false);
       });
@@ -43,7 +42,7 @@ export function useTransactionReceipt({ transaction, open, onClose }) {
     return () => {
       isCurrent = false;
     };
-  }, [selected, showError]);
+  }, [selected]);
 
   const revert = useCallback(async () => {
     setIsReverting(true);
@@ -55,12 +54,12 @@ export function useTransactionReceipt({ transaction, open, onClose }) {
       showSuccess("Transação devolvida com sucesso.");
 
       await loadUser();
-    } catch (error) {
-      showError(getErrorMessage(error));
+    } catch {
+      setIsReverting(false);
     } finally {
       setIsReverting(false);
     }
-  }, [selected, onClose, showSuccess, showError, loadUser]);
+  }, [selected, onClose, showSuccess, loadUser]);
 
   const isDetailLoaded = Boolean(detail) && detail.id === selected?.id;
 

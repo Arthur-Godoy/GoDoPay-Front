@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAccount } from "~/hooks/useAccount";
 import { useSnackbar } from "~/hooks/useSnackbar";
-import { getErrorMessage } from "~/utils/httpError";
 
 export function useAccountSwitcher({ open, onClose }) {
   const { currentAccount, accounts, isLoadingAccounts, loadAccounts, switchAccount } =
     useAccount();
 
-  const { showSuccess, showError } = useSnackbar();
+  const { showSuccess } = useSnackbar();
 
   const [switchingId, setSwitchingId] = useState(null);
 
@@ -15,8 +14,8 @@ export function useAccountSwitcher({ open, onClose }) {
     if (!open) return;
 
     setSwitchingId(null);
-    loadAccounts().catch((error) => showError(getErrorMessage(error)));
-  }, [open, loadAccounts, showError]);
+    loadAccounts().catch(() => {});
+  }, [open, loadAccounts]);
 
   const selectAccount = useCallback(
     async (accountId) => {
@@ -27,13 +26,13 @@ export function useAccountSwitcher({ open, onClose }) {
 
         showSuccess(`Conta alterada para ${data.current_account.nickname}.`);
         onClose();
-      } catch (error) {
-        showError(getErrorMessage(error));
+      } catch {
+        setSwitchingId(null);
       } finally {
         setSwitchingId(null);
       }
     },
-    [switchAccount, showSuccess, showError, onClose],
+    [switchAccount, showSuccess, onClose],
   );
 
   return {

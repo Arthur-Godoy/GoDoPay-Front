@@ -3,9 +3,12 @@ import { Box } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import SavingsRoundedIcon from "@mui/icons-material/SavingsRounded";
 import DepositDialog from "~/components/home/DepositDialog";
+import { useTransfer } from "~/hooks/useTransfer";
 import ActionCard from "./ActionCard";
 
 export default function QuickActions() {
+  const { openTransfer } = useTransfer();
+
   const [isDepositOpen, setIsDepositOpen] = useState(false);
 
   return (
@@ -14,6 +17,7 @@ export default function QuickActions() {
         icon={SendRoundedIcon}
         label="Transferir"
         description="Envie para um contato"
+        onClick={openTransfer}
       />
       <ActionCard
         icon={SavingsRoundedIcon}

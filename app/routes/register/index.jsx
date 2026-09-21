@@ -12,7 +12,7 @@ import AuthLayout from "../../components/auth/AuthLayout";
 import { useRegister } from "./useRegister";
 
 export default function Register() {
-  const { field, isSubmitting, submitError, onSubmit } = useRegister();
+  const { field, masks, isSubmitting, submitError, onSubmit } = useRegister();
 
   return (
     <AuthLayout
@@ -39,8 +39,9 @@ export default function Register() {
         <TextField
           label="CPF ou CNPJ"
           fullWidth
+          placeholder="000.000.000-00"
           slotProps={{ htmlInput: { inputMode: "numeric" } }}
-          {...field("document")}
+          {...field("document", masks.document)}
         />
         <TextField
           label="Senha"

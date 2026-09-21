@@ -1,6 +1,8 @@
 import axios from "axios";
+import { notifyError } from "~/services/errorNotifier";
 import { clearSession } from "~/services/session";
 import { tokenStorage } from "~/services/tokenStorage";
+import { getErrorMessage, hasFieldErrors } from "~/utils/httpError";
 
 const baseURL = "http://localhost:8000/api";
 const PUBLIC_ENDPOINTS = ["/login", "/register", "/refresh"];
@@ -32,15 +34,24 @@ useHttp.interceptors.request.use((config) => {
   return config;
 });
 
+function reportError(error) {
+  if (hasFieldErrors(error)) return;
+
+  notifyError(getErrorMessage(error));
+}
+
 useHttp.interceptors.response.use(null, async (error) => {
   const { config, response } = error;
 
   if (response?.status !== 401 || PUBLIC_ENDPOINTS.includes(config?.url)) {
+    reportError(error);
+
     return Promise.reject(error);
   }
 
   if (config._retry) {
     await clearSession();
+
     return Promise.reject(error);
   }
 

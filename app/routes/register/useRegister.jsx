@@ -5,6 +5,7 @@ import { authService } from "~/services/http/authService";
 import { tokenStorage } from "~/services/tokenStorage";
 import { useSnackbar } from "~/hooks/useSnackbar";
 import { applyFieldErrors, getErrorMessage } from "~/utils/httpError";
+import { maskDocument } from "~/utils/masks";
 import { muiField } from "~/utils/muiField";
 import { yupResolver } from "~/utils/yupResolver";
 import { registerSchema } from "~/validators/auth";
@@ -41,7 +42,8 @@ export function useRegister() {
   });
 
   return {
-    field: (name) => muiField(form, name),
+    field: (name, mask) => muiField(form, name, mask),
+    masks: { document: maskDocument },
     isSubmitting: form.formState.isSubmitting,
     submitError,
     onSubmit,

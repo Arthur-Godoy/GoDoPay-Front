@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { transactionService } from "~/services/http/transactionService";
 import { useAccount } from "~/hooks/useAccount";
-import { useSnackbar } from "~/hooks/useSnackbar";
 import { unwrapData } from "~/utils/apiResponse";
-import { getErrorMessage } from "~/utils/httpError";
 
 const FIRST_PAGE = 1;
 
@@ -31,8 +29,6 @@ function toQueryParams(filters, sort, page) {
 
 export function useTransactions() {
   const { currentAccount, accountVersion } = useAccount();
-  const { showError } = useSnackbar();
-
   const [transactions, setTransactions] = useState([]);
   const [paginator, setPaginator] = useState({
     total: 0,
@@ -61,12 +57,12 @@ export function useTransactions() {
         total: result?.total ?? 0,
         perPage: result?.per_page ?? DEFAULT_PER_PAGE,
       });
-    } catch (error) {
-      showError(getErrorMessage(error));
+    } catch {
+      setTransactions([]);
     } finally {
       setIsLoading(false);
     }
-  }, [accountId, accountVersion, filters, sort, page, showError]);
+  }, [accountId, accountVersion, filters, sort, page]);
 
   useEffect(() => {
     loadTransactions();

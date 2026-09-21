@@ -52,6 +52,7 @@ export default function TransactionReceipt({
   const canRevert =
     Boolean(transaction) &&
     transaction.type === "transfer" &&
+    isIncoming
     !isRefund &&
     !wasReturned;
 

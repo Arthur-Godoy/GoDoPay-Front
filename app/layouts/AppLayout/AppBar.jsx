@@ -1,4 +1,4 @@
-import { AppBar, Box, CircularProgress, IconButton, Toolbar, Tooltip } from "@mui/material";
+import { AppBar, Box, CircularProgress, Divider, IconButton, Toolbar, Tooltip } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import Logo from "~/components/ui/Logo";
 import { useLogout } from "./useLogout";
@@ -9,7 +9,7 @@ export default function LayoutAppBar() {
   return (
     <AppBar position="fixed" color="inherit" elevation={0} enableColorOnDark>
       <Toolbar className="flex items-center gap-3 min-h-[68px]">
-        <Logo variant="short" height={42} />
+        <Logo variant="short" height={72} />
 
         <Box className="flex-1" />
 
@@ -29,6 +29,7 @@ export default function LayoutAppBar() {
           </span>
         </Tooltip>
       </Toolbar>
+      <Divider />
     </AppBar>
   );
 }
