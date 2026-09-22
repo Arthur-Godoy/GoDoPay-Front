@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { solicitationService } from "~/services/http/solicitationService";
 import { transactionService } from "~/services/http/transactionService";
 import { useAccount } from "~/hooks/useAccount";
 import { useSnackbar } from "~/hooks/useSnackbar";
@@ -11,6 +12,7 @@ export function useTransactionReceipt({ transaction, open, onClose }) {
   const [detail, setDetail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isReverting, setIsReverting] = useState(false);
+  const [isSolicitating, setIsSolicitating] = useState(false);
 
   useEffect(() => {
     if (!open || !transaction) return;
@@ -61,6 +63,21 @@ export function useTransactionReceipt({ transaction, open, onClose }) {
     }
   }, [selected, onClose, showSuccess, loadUser]);
 
+  const solicitateRevert = useCallback(async () => {
+    setIsSolicitating(true);
+
+    try {
+      await solicitationService.create(selected.id);
+
+      onClose();
+      showSuccess("Solicitação de devolução enviada.");
+    } catch {
+      setIsSolicitating(false);
+    } finally {
+      setIsSolicitating(false);
+    }
+  }, [selected, onClose, showSuccess]);
+
   const isDetailLoaded = Boolean(detail) && detail.id === selected?.id;
 
   return {
@@ -69,6 +86,8 @@ export function useTransactionReceipt({ transaction, open, onClose }) {
     isLoading: isLoading && !isDetailLoaded,
     isReverting,
     revert,
-    openRelated
+    isSolicitating,
+    solicitateRevert,
+    openRelated,
   };
 }

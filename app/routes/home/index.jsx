@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import BalanceCard from "~/components/home/BalanceCard";
 import QuickActions from "~/components/home/QuickActions";
-import TransactionList from "~/components/home/TransactionList";
+import HomeTabs from "~/components/home/HomeTabs";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
 
       <QuickActions />
 
-      <TransactionList />
+      <HomeTabs />
     </Box>
   );
 }

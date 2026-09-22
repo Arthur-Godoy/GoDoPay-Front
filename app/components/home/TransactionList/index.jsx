@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import {
   Box,
-  Card,
   CardContent,
   Divider,
   Table,
@@ -51,17 +50,15 @@ export default function TransactionList() {
   const columns = useMemo(() => buildColumns(accountId), [accountId]);
 
   return (
-    <Card>
+    <>
       <CardContent className="p-5 pb-4">
-        <Box className="mb-4 flex flex-row items-center justify-between gap-4">
-          <Typography variant="h6">Extrato</Typography>
-
-          {!isLoading && total > 0 && (
+        {!isLoading && total > 0 && (
+          <Box className="mb-3 flex flex-row justify-end">
             <Typography variant="caption" color="text.secondary">
               {total} lançamentos
             </Typography>
-          )}
-        </Box>
+          </Box>
+        )}
 
         <TransactionFilters
           filters={filters}
@@ -146,6 +143,6 @@ export default function TransactionList() {
         labelDisplayedRows={({ from, to, count }) => `${from}–${to} de ${count}`}
         onPageChange={(_, nextPage) => changePage(nextPage + 1)}
       />
-    </Card>
+    </>
   );
 }

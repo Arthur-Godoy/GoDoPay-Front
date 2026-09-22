@@ -38,7 +38,8 @@ export default function TransactionReceipt({
     isLoading,
     isReverting,
     revert,
-    openRelated,
+    isSolicitating,
+    solicitateRevert,
   } = useTransactionReceipt({
     transaction: selectedTransaction,
     open,
@@ -53,6 +54,12 @@ export default function TransactionReceipt({
     Boolean(transaction) &&
     transaction.type === "transfer" &&
     isIncoming &&
+    !isRefund &&
+    !wasReturned;
+
+  const canSolicitate =
+    transaction?.type === "transfer" &&
+    !isIncoming &&
     !isRefund &&
     !wasReturned;
 
@@ -147,6 +154,25 @@ export default function TransactionReceipt({
                 }
               >
                 Devolver transação
+              </Button>
+            )}
+
+            {canSolicitate && (
+              <Button
+                fullWidth
+                variant="outlined"
+                color="primary"
+                disabled={isSolicitating}
+                onClick={solicitateRevert}
+                startIcon={
+                  isSolicitating ? (
+                    <CircularProgress size={16} color="inherit" />
+                  ) : (
+                    <UndoRoundedIcon />
+                  )
+                }
+              >
+                Solicitar devolução
               </Button>
             )}
 

@@ -165,6 +165,21 @@ const theme = createTheme({
         },
       },
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          "--mui-palette-text-secondary": TEXT,
+          opacity: 0.7,
+          "&:hover": {
+            opacity: 1,
+          },
+          "&.Mui-selected": {
+            color: GOLD,
+            opacity: 1,
+          },
+        },
+      },
+    },
     MuiInputLabel: {
       styleOverrides: {
         root: {
